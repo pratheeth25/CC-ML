@@ -1,15 +1,39 @@
+# Environment & Secrets
 .env
+.env.local
+
+# Python Bytecode & Cache
 __pycache__/
-*.pyc
-*.pkl
+*.py[cod]
+*$py.class
 *.egg-info/
 dist/
 build/
+.eggs/
+
+# Virtual Environments
 .venv/
 venv/
+ENV/
+env/
+
+# Testing & Coverage
 .pytest_cache/
+.coverage
+htmlcov/
+
+# MLflow Experiment Logs & DB
 mlruns/
 mlartifacts/
 mlflow.db
+
+# DVC Internal Caches
 .dvc/cache/
 .dvc/tmp/
+
+# Model Binary Artifacts
+*.pkl
+
+# OS Specific
+.DS_Store
+Thumbs.db
