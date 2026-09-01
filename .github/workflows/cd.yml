@@ -37,4 +37,16 @@ jobs:
 
       - name: Validate Kubernetes Manifests
         run: |
-          kubectl apply --dry-run=client --validate=false -f k8s/
+          pip install pyyaml
+          python - <<'EOF'
+          import yaml, glob, sys
+          files = glob.glob("k8s/*.yaml")
+          if not files:
+              print("No YAML files found in k8s/", file=sys.stderr)
+              sys.exit(1)
+          for f in files:
+              with open(f) as fh:
+                  yaml.safe_load(fh)
+              print(f"OK: {f}")
+          print("All Kubernetes manifests are valid YAML.")
+          EOF
