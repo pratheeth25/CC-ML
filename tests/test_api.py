@@ -1,11 +1,10 @@
 import os
-import pytest
 from fastapi.testclient import TestClient
 
-os.environ["API_KEY"] = "test-api-key-456"
-os.environ["CORS_ORIGINS"] = "http://localhost:3000"
+os.environ.setdefault("API_KEY", "test-api-key-456")
+os.environ.setdefault("CORS_ORIGINS", "http://localhost:3000")
 
-from src.api import app
+from src.api import app  # noqa: E402
 
 client = TestClient(app)
 

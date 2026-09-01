@@ -96,11 +96,17 @@ def preprocess_data(
     print("\n--- Feature Diagnostics (Missing Values) ---")
     print("Train missing feature values per column:")
     train_feat_missing = X_train.isna().sum()
-    print(train_feat_missing[train_feat_missing > 0] if (train_feat_missing > 0).any() else "No missing feature values in train.")
+    if (train_feat_missing > 0).any():
+        print(train_feat_missing[train_feat_missing > 0])
+    else:
+        print("No missing feature values in train.")
 
     print("\nTest missing feature values per column:")
     test_feat_missing = X_test.isna().sum()
-    print(test_feat_missing[test_feat_missing > 0] if (test_feat_missing > 0).any() else "No missing feature values in test.")
+    if (test_feat_missing > 0).any():
+        print(test_feat_missing[test_feat_missing > 0])
+    else:
+        print("No missing feature values in test.")
 
     numeric_cols = X_train.select_dtypes(include=["int64", "float64", "number"]).columns.tolist()
     categorical_cols = X_train.select_dtypes(include=["object", "category"]).columns.tolist()

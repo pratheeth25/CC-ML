@@ -1,7 +1,6 @@
 import os
 import pytest
 import pandas as pd
-import numpy as np
 from src.preprocessing import clean_and_encode_target
 
 EXPECTED_RAW_COLUMNS = [
