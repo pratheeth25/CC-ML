@@ -31,9 +31,6 @@ mlflow.db
 .dvc/cache/
 .dvc/tmp/
 
-# Model Binary Artifacts
-*.pkl
-
 # OS Specific
 .DS_Store
 Thumbs.db

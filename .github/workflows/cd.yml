@@ -23,23 +23,18 @@ jobs:
 
       - name: Container Smoke Test
         run: |
-          # Start container in background
           docker run -d -p 8000:8000 --name api-smoke-test \
             -e API_KEY="cd-smoke-test-key" \
             -e CORS_ORIGINS="http://localhost:3000" \
             churn-api:latest
 
-          # Wait for container startup
           sleep 5
+          docker logs api-smoke-test
+          curl --fail --retry 5 --retry-connrefused --retry-delay 2 http://localhost:8000/health
 
-          # Verify /health endpoint returns 200
-          curl --fail http://localhost:8000/health
-
-          # Clean up test container
           docker stop api-smoke-test
           docker rm api-smoke-test
 
       - name: Validate Kubernetes Manifests
         run: |
-          # Dry-run client validation for all K8s YAML files
           kubectl apply --dry-run=client -f k8s/
