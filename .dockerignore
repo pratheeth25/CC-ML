@@ -1,0 +1,12 @@
+data/
+.git/
+.gitignore
+__pycache__/
+*.pyc
+.env
+.env.example
+tests/
+README.md
+main.py
+projectstructure
+*.md

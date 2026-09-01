@@ -1,0 +1,28 @@
+stages:
+  preprocess:
+    cmd: python src/preprocessing.py
+    deps:
+      - src/preprocessing.py
+      - data/raw/train.csv
+      - data/raw/test.csv
+    outs:
+      - data/preprocessed/train_processed.csv
+      - data/preprocessed/test_processed.csv
+      - models/preprocessor.pkl
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/preprocessed/train_processed.csv
+    outs:
+      - models/logistic_regression_model.pkl
+      - models/model_config.json
+
+  evaluate:
+    cmd: python src/predict.py
+    deps:
+      - src/predict.py
+      - data/preprocessed/test_processed.csv
+      - models/logistic_regression_model.pkl
+      - models/model_config.json
