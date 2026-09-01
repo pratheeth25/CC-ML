@@ -63,6 +63,6 @@ def test_predict_with_valid_api_key():
 def test_predict_validation_error():
     headers = {"X-API-Key": "test-api-key-456"}
     invalid_payload = SAMPLE_CUSTOMER.copy()
-    invalid_payload["Age"] = -5  # Invalid Age
+    invalid_payload["Age"] = -5
     response = client.post("/predict", json=invalid_payload, headers=headers)
     assert response.status_code == 422

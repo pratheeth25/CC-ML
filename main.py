@@ -1,9 +1,5 @@
-import pandas as pd
+import uvicorn
+from src.api import app
 
-df1 = pd.read_csv('data/c1.csv')
-df2 = pd.read_csv('data/c2.csv')
-
-print(len(df1))
-print(len(df2))
-
-print(df2.isnull())
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)
