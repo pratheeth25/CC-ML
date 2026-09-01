@@ -122,7 +122,7 @@ async def predict(customer: CustomerData, api_key: str = Depends(verify_api_key)
         feature_names = preprocessor.get_feature_names_out()
         X = pd.DataFrame(X_transformed, columns=feature_names)
         probability = float(model.predict_proba(X)[0][1])
-    except Exception as e:
+    except Exception:
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=422, detail="Could not process input data")

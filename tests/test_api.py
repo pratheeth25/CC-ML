@@ -48,7 +48,8 @@ def test_predict_with_invalid_api_key():
 
 
 def test_predict_with_valid_api_key():
-    headers = {"X-API-Key": "test-api-key-456"}
+    api_key = os.getenv("API_KEY", "test-api-key-456")
+    headers = {"X-API-Key": api_key}
     response = client.post("/predict", json=SAMPLE_CUSTOMER, headers=headers)
     assert response.status_code == 200
     data = response.json()
@@ -61,7 +62,8 @@ def test_predict_with_valid_api_key():
 
 
 def test_predict_validation_error():
-    headers = {"X-API-Key": "test-api-key-456"}
+    api_key = os.getenv("API_KEY", "test-api-key-456")
+    headers = {"X-API-Key": api_key}
     invalid_payload = SAMPLE_CUSTOMER.copy()
     invalid_payload["Age"] = -5
     response = client.post("/predict", json=invalid_payload, headers=headers)

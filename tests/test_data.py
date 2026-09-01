@@ -10,11 +10,13 @@ EXPECTED_RAW_COLUMNS = [
 ]
 
 
+@pytest.mark.skipif(not os.path.exists("./data/raw/train.csv"), reason="Raw dataset tracked by DVC")
 def test_raw_files_exist():
     assert os.path.exists("./data/raw/train.csv"), "data/raw/train.csv missing"
     assert os.path.exists("./data/raw/test.csv"), "data/raw/test.csv missing"
 
 
+@pytest.mark.skipif(not os.path.exists("./data/raw/train.csv"), reason="Raw dataset tracked by DVC")
 def test_raw_data_schema():
     train_df = pd.read_csv("./data/raw/train.csv", nrows=5)
     test_df = pd.read_csv("./data/raw/test.csv", nrows=5)
@@ -38,6 +40,10 @@ def test_clean_and_encode_target_unexpected_input():
     assert "unexpected target value" in str(excinfo.value).lower()
 
 
+@pytest.mark.skipif(
+    not os.path.exists("./data/preprocessed/train_processed.csv"),
+    reason="Preprocessed data tracked by DVC"
+)
 def test_preprocessed_data_validity():
     assert os.path.exists("./data/preprocessed/train_processed.csv")
     assert os.path.exists("./data/preprocessed/test_processed.csv")

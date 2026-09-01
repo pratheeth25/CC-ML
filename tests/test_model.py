@@ -1,6 +1,7 @@
 import os
 import json
 import pickle
+import pytest
 import pandas as pd
 from sklearn.metrics import roc_auc_score
 
@@ -48,6 +49,10 @@ def test_model_inference_pipeline():
     assert 0.0 <= proba[0] <= 1.0
 
 
+@pytest.mark.skipif(
+    not os.path.exists("./data/preprocessed/test_processed.csv"),
+    reason="Preprocessed data tracked by DVC"
+)
 def test_model_performance_baseline():
     with open("./models/logistic_regression_model.pkl", "rb") as f:
         model = pickle.load(f)
